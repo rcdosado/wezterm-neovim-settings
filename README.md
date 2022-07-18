@@ -7,19 +7,18 @@ wezterm-neovim for windows
 Requirements: 
 ============
  * Neovim 
- * vim-plug
  * Ripgrep
+ * Ag (silver searcher)
  * FZF
 
 
 To Install:
 ===========
-1. Create your python environment as env39 inside this repo
+1. Create your python environment as env39 inside this repo, install pynvim inside environment
 2. open your terminal and clone this repository
 3. go to this repo location
 4. create folder called plugins 
-5. install vim-plug `https://github.com/junegunn/vim-plug`
-6. open neovim, inside neovim type `:` then type PlugInstall
+5. open neovim, inside neovim type `:` then type PlugInstall
 
  
 
