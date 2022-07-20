@@ -153,7 +153,7 @@ nnoremap <leader>ev :e $MYVIMRC<cr>
 nnoremap <leader>eV :tabnew $MYVIMRC<cr>
 nnoremap <leader>eW :tabnew c:/docs/notes/index.md<cr>
 nnoremap <leader>es :tabnew c:/docs/notes/etc.txt<cr>
-nnoremap <leader>ew :tabnew c:/tools/wezterm.lua<cr>
+nnoremap <leader>ew :tabnew ~\Appdata\Local\nvim\wezterm.lua<cr>
 nnoremap <leader>etest :tabnew ~\AppData\Local\nvim\sources\vim-test-settings.vim<CR>
 " nnoremap <leader>V :vsp $myvimrc<cr>
 
