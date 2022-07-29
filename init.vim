@@ -78,8 +78,8 @@ Plug 'rafamadriz/friendly-snippets'
 "testers 
 Plug 'vim-test/vim-test'
 
-" schemes/themes / uncomment to enable third party themes
-source ~/Appdata/Local/nvim/sources/themes-plugs.vim
+" schemes / themes / uncomment to enable third party themes
+" source ~/Appdata/Local/nvim/sources/themes-plugs.vim
 
 call plug#end()
 
@@ -91,17 +91,17 @@ let g:gutentags_generate_on_write=1
 
 
 " au ColorScheme * hi Normal ctermbg=None
-" colorscheme shades_of_purple
-" colorscheme tokyonight
-" colorscheme dracula
-colorscheme kanagawa
+
+" colorscheme editplus
+colorscheme badwolf
+
 
 "Undo stuff 
 if has("persistent_undo")
     set undodir="~/AppData/Local/nvim-data/undo"
     set undofile
-    set history=100
-    set undolevels=100
+    set history=1000
+    set undolevels=1000
 endif
 
 "resize windows
@@ -155,6 +155,8 @@ nnoremap <leader>eW :tabnew c:/docs/notes/index.md<cr>
 nnoremap <leader>es :tabnew c:/docs/notes/etc.txt<cr>
 nnoremap <leader>ew :tabnew ~\Appdata\Local\nvim\wezterm.lua<cr>
 nnoremap <leader>etest :tabnew ~\AppData\Local\nvim\sources\vim-test-settings.vim<CR>
+nnoremap <leader>ed :e c:/Users/RAG/Desktop/downloads.txt<CR>
+nnoremap <leader>em :tabnew ~\AppData\Local\nvim\sources\themes-plugs.vim<CR>
 " nnoremap <leader>V :vsp $myvimrc<cr>
 
 " Easy select all of file

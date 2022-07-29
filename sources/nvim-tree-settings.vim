@@ -6,6 +6,7 @@ lua require'nvim-tree'.setup {
             \ view = {
                 \ side = "left",
                 \ signcolumn = "no",
+                \ relativenumber = true,
                 \ mappings = {
                     \ list = {
                         \ { key = "H", action = "" },
