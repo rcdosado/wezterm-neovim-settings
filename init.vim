@@ -162,8 +162,8 @@ let g:indent_blankline_enabled = 0
 nnoremap <leader>zz :source $MYVIMRC<cr> 
 
 "TOGGLES
-nnoremap L :Vista!!<cr>
-nnoremap H :NvimTreeToggle<cr>
+nnoremap <leader>l :Vista!!<cr>
+nnoremap <leader>h :NvimTreeToggle<cr>
 
 " https://vim.fandom.com/wiki/Insert_current_date_or_time
 " nnoremap <S-F5> :pu=strftime('%a %d %b %Y')<CR>
@@ -220,8 +220,8 @@ autocmd FileType php,c nnoremap ff vi{
 
 
 " Remap H and L to switch tabs left or right
-" nnoremap H :bprev<cr>
-" nnoremap L :bnext<cr>
+nnoremap H :bprev<cr>
+nnoremap L :bnext<cr>
 
 nnoremap J <c-f>
 nnoremap K <c-b>
