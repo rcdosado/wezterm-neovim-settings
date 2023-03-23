@@ -1,7 +1,7 @@
 ﻿" https://neovim.io/doc/user/quickref.html
 set encoding=UTF-8
-set termguicolors
 set linebreak
+set termguicolors
 set noswapfile
 set hlsearch
 set ignorecase
@@ -18,37 +18,46 @@ set showbreak=↪\
 set listchars=tab:→\ ,trail:∙,eol:↲,nbsp:␣,extends:⟩,precedes:⟨
 set wildignore=*.swp,*.bak,*.pyc,*.class
 set shiftround
+set formatoptions-=cro
 " set list
-" set number
+set number
 set relativenumber
 " set invnumber list!
 
 call plug#begin('~\AppData\Local\nvim\plugins')
 
 Plug 'kyazdani42/nvim-tree.lua'
-Plug 'jiangmiao/auto-pairs'
+Plug 'cohama/lexima.vim'
 Plug 'kylechui/nvim-surround'
-Plug 'ggandor/lightspeed.nvim'
+Plug 'ggandor/leap.nvim'
 Plug 'kyazdani42/nvim-web-devicons' " for file icons
 Plug 'mattn/emmet-vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-fugitive'
-Plug 'dense-analysis/ale'
 Plug 'preservim/nerdcommenter'
+Plug 'windwp/nvim-autopairs'
+
+"startifier
+Plug 'mhinz/vim-startify'
+
+"keyboard
+Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }
+
 
 " profile startup time
 Plug 'dstein64/vim-startuptime'
 
 " status line
 Plug 'nvim-lualine/lualine.nvim'
+" Plug 'akinsho/bufferline.nvim', { 'tag': 'v3.*' }
 
 " indent guide
 Plug 'lukas-reineke/indent-blankline.nvim'
 
 "Tags 
 Plug 'liuchengxu/vista.vim'
-Plug 'ludovicchabant/vim-gutentags'
+" Plug 'ludovicchabant/vim-gutentags'
 
 "Wiki
 " Plug 'vimwiki/vimwiki'
@@ -56,19 +65,20 @@ Plug 'ludovicchabant/vim-gutentags'
 "window manager 
 Plug 'https://gitlab.com/yorickpeterse/nvim-window.git'
 
-"Javascript
-Plug 'yuezk/vim-js'
-Plug 'maxmellon/vim-jsx-pretty'
+Plug 'junegunn/vim-easy-align'
 
-Plug 'prettier/vim-prettier', {
-  \ 'do': 'yarn install --frozen-lockfile --production',
-  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'svelte', 'yaml', 'html'] 
-  \ }
+Plug 'sbdchd/neoformat'
 
-" autocomplete
-Plug 'neovim/nvim-lspconfig'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'deoplete-plugins/deoplete-jedi'
+" make sure its compatible with deoplete
+Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins' }
+
+" language servers
+Plug 'prabirshrestha/vim-lsp'
+Plug 'mattn/vim-lsp-settings'
+
+"Auto completion
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
 
 " snippets
 Plug 'hrsh7th/vim-vsnip'
@@ -78,45 +88,72 @@ Plug 'rafamadriz/friendly-snippets'
 "testers 
 Plug 'vim-test/vim-test'
 
+" minimalists themes
+Plug 'sjl/badwolf'
+Plug 'robertmeta/nofrils'
+
 " schemes / themes / uncomment to enable third party themes
-" source ~/Appdata/Local/nvim/sources/themes-plugs.vim
+source ~/Appdata/Local/nvim/sources/themes-plugs.vim
 
 call plug#end()
 
 let mapleader=" "
-let g:deoplete#enable_at_startup = 1
-let g:vsnip_snippet_dir="~/AppData/Local/nvim/plugins/friendly-snippets"
+
+" save your custom snippets here
+let g:vsnip_snippet_dirs = ['~/Appdata/Local/nvim/snippets']
+
 
 let g:gutentags_generate_on_write=1
 
+nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
 
 " au ColorScheme * hi Normal ctermbg=None
 
-" colorscheme editplus
-colorscheme badwolf
+" turn off to reveal true colors, enable transparency
+" highlight Normal guibg=none
+
+" THEMES
+set background=dark
+" set background=light
+"
+" editplus, paramount, tokyonight, shades_of_purple
+" badwolf, moonfly, dracula, nord, leaf, nightfox
+" dawnfox, dayfox, duskfox, nordfox, terafox, carbonfox
+" nofrils-dark light sepia acme, papercolor, murphy
+" gruvbox, nighfly,kanagawa, solarized, minimalist
+" purify, catppuccin, cobalt2
+
+colorscheme cobalt2
+" let g:catppuccin_flavour = "frappe" " dusk, latte, frappe, macchiato, mocha
 
 
-"Undo stuff 
-if has("persistent_undo")
-    set undodir="~/AppData/Local/nvim-data/undo"
-    set undofile
-    set history=1000
-    set undolevels=1000
-endif
+" change working directory to the location of the current file
+nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
+
+
+set hidden
+" set undofile
+" set undodir="~/AppData/Local/nvim-data/undo"
+" set history=1000
+" set undolevels=1000
 
 "resize windows
 nnoremap <leader>. :vertical resize +20<CR>
 nnoremap <leader>, :vertical resize -20<CR>
-nnoremap <leader>= :wincmd +<CR>
-nnoremap <leader>- :wincmd -<CR>
+nnoremap <leader>= :resize +5<CR>
+nnoremap <leader>- :resize -5<CR>
 
 "switch buffers 
 nnoremap <Leader>b :ls<CR>:b<Space>
 
-" make background transparent
-" highlight Normal guibg=none
+"browse old files
+nmap <silent> <leader>m :History<CR>
 
-lua require'lspconfig'.pyright.setup{}
+"init
+lua require('leap').set_default_keymaps()
+" lua require('bufferline').setup()
+lua require("nvim-autopairs").setup {}
+lua require'nvim-web-devicons'.get_icons()
 
 let g:python3_host_prog='~/Appdata/Local/nvim/env39/Scripts/python.exe'
 let g:loaded_ruby_provider = 0
@@ -125,48 +162,62 @@ let g:indent_blankline_enabled = 0
 nnoremap <leader>zz :source $MYVIMRC<cr> 
 
 "TOGGLES
-
+nnoremap L :Vista!!<cr>
 nnoremap H :NvimTreeToggle<cr>
+
+" https://vim.fandom.com/wiki/Insert_current_date_or_time
+" nnoremap <S-F5> :pu=strftime('%a %d %b %Y')<CR>
+nnoremap <S-F5> :pu=strftime('%c')<CR>
+
+
 nmap <F3> :IndentBlanklineToggle<cr>
 nmap <F5> :set list!<cr>
 
 " choose toggles here for line numbers
-" nmap <F6> :set number!<cr>
 nmap <F6> :set relativenumber!<cr>
+" nmap <F6> :set relativenumber!<cr>
 
-map <leader><leader> :bprevious<CR>
 
 " formatting option for this file types
 autocmd Filetype html,ruby,javascript,yml,yaml,json,haskell,ejs,htmldjango,django setlocal ts=2 sts=2 sw=2
 
-" Easy insertion of a trailing ; or , from insert mode
-imap ;; <Esc>A;<Esc>o
-imap ,, <Esc>A,<Esc>
+" topmost
+map <leader><leader> zt
+
+" Easy insertion of a  ; or , from insert mode
+imap ;; <Esc>A;<Esc>
+imap OO <Esc>A;<Esc>o
+imap ,, <Esc>A,<Esc><CR>
+
 
 
 "" After searching, pressing escape stops the highlight
 nnoremap <silent> <esc> :noh<cr><esc>
 
 " wopen
-nnoremap <leader>en :enew<CR>
-nnoremap <leader>ev :e $MYVIMRC<cr>
-nnoremap <leader>eV :tabnew $MYVIMRC<cr>
-nnoremap <leader>eW :tabnew c:/docs/notes/index.md<cr>
-nnoremap <leader>es :tabnew c:/docs/notes/etc.txt<cr>
-nnoremap <leader>ew :tabnew ~\Appdata\Local\nvim\wezterm.lua<cr>
-nnoremap <leader>etest :tabnew ~\AppData\Local\nvim\sources\vim-test-settings.vim<CR>
-nnoremap <leader>ed :e c:/Users/RAG/Desktop/downloads.txt<CR>
-nnoremap <leader>em :tabnew ~\AppData\Local\nvim\sources\themes-plugs.vim<CR>
+nnoremap <leader>en : enew<CR>
+nnoremap <leader>ev : e $MYVIMRC<cr>
+nnoremap <leader>eV : tabnew $MYVIMRC<cr>
+nnoremap <leader>eW : tabnew c:/docs/notes/index.md<cr>
+nnoremap <leader>es : tabnew c:/docs/notes/etc.txt<cr>
+nnoremap <leader>ew : tabnew ~\Appdata\Local\nvim\wezterm.lua<cr>
+nnoremap <leader>et : tabnew ~\AppData\Local\nvim\sources\vim-test-settings.vim<CR>
+nnoremap <leader>em : tabnew ~\AppData\Local\nvim\sources\themes-plugs.vim<CR>
+nnoremap <leader>ef : tabnew c:\users\rag\files\cyrish.txt<CR>
+nnoremap <leader>ed : e c:/Users/RAG/Desktop/downloads.txt<CR>
+nnoremap <leader>ek : e C:/docs/notes/CheatSheets/shortcuts.md<CR>
 " nnoremap <leader>V :vsp $myvimrc<cr>
 
 " Easy select all of file
-nnoremap <leader>sa ggvG<c-$>
+" nnoremap <leader>sa ggvG<c-$>
+nnoremap <leader>sa <esc>ggVG<CR> 
 
 "use jj to exit insert mode
-imap jj <Esc>
+" imap jj <Esc>
+autocmd FileType html nnoremap ff vat
+autocmd FileType php,c nnoremap ff vi{
 
-" move current location to topmost
-nnoremap tt zt
+
 
 " Remap H and L to switch tabs left or right
 " nnoremap H :bprev<cr>
@@ -174,7 +225,7 @@ nnoremap tt zt
 
 nnoremap J <c-f>
 nnoremap K <c-b>
-nnoremap L $
+
 
 " Saving file
 noremap <C-S> :update<cr>
@@ -182,14 +233,22 @@ vnoremap <C-S> <C-C>:update<cr>
 inoremap <C-S> <C-O>:update<cr>
 
 " This code auto source init.vim when saved
-autocmd! BufWritePost $MYVIMRC source $MYVIMRC 
+autocmd! BufWritePost $MYVIMRC source $MYVIMRC
 
 " close all buffers except current, call BufCurOnly
 command! BufCurOnly execute '%bdelete|edit#|bdelete#'
 
+" search for the current visual selection
+vnoremap * "zy:let @/=@z<C-r>n
+
+" take yanked word and place in search and replace
+" nnoremap <Tab><Tab> :%s/<C-r>"/<C-r>"/g\|''<Left><Left><Left><Left><Left>
 
 " copy paste
 set clipboard^=unnamed,unnamedplus
+" remap paste key so it always paste below cursor  
+" nmap p :pu<CR>
+ 
 
 " go to next line during insert mode
 " press Ctrl-o during insert mode
@@ -220,7 +279,7 @@ source ~/Appdata/Local/nvim/sources/theprimeagen-settings.vim
 source ~/Appdata/Local/nvim/sources/fzf-settings.vim
 
 """"""""""""""""""""""""""""""""""""
-" NVIM TREE SETTINGS
+" NVIM_TREE SETTINGS
 """"""""""""""""""""""""""""""""""""
 source ~/Appdata/Local/nvim/sources/nvim-tree-settings.vim
 """"""""""""""""""""""""""""""""""""
@@ -239,27 +298,15 @@ source ~/Appdata/Local/nvim/sources/lualine-settings.vim
 " LIGHTSPEED SETTINGS
 """"""""""""""""""""""""""""""""""""
 source ~/Appdata/Local/nvim/sources/lightspeed-settings.vim
+
 """"""""""""""""""""""""""""""""""""
 " FUGITIVE SETTINGS
 """"""""""""""""""""""""""""""""""""
 source ~/Appdata/Local/nvim/sources/fugitive-settings.vim
 """"""""""""""""""""""""""""""""""""
-" VIM-SNIP SETTINGS
-""""""""""""""""""""""""""""""""""""
-source ~/Appdata/Local/nvim/sources/vim-snip-settings.vim
-""""""""""""""""""""""""""""""""""""
-" ALE SETTINGS
-""""""""""""""""""""""""""""""""""""
-source ~/Appdata/Local/nvim/sources/ale-settings.vim
-""""""""""""""""""""""""""""""""""""
 " NERDCOMMENTER SETTINGS
 """"""""""""""""""""""""""""""""""""
 source ~/Appdata/Local/nvim/sources/nerdcommenter-settings.vim
-
-""""""""""""""""""""""""""""""""""""
-" DEOPLETE SETTINGS
-""""""""""""""""""""""""""""""""""""
-source ~/Appdata/Local/nvim/sources/deoplete-settings.vim
 
 """"""""""""""""""""""""""""""""""""
 " VISTA SETTINGS
@@ -271,10 +318,10 @@ source ~/Appdata/Local/nvim/sources/vista-settings.vim
 """"""""""""""""""""""""""""""""""""
 " source ~/Appdata/Local/nvim/sources/vimwiki-settings.vim
 
+" NEOFORMAT SETTINGS
 """"""""""""""""""""""""""""""""""""
-" PRETTIER SETTINGS
+source ~/Appdata/Local/nvim/sources/neoformat-settings.vim
 """"""""""""""""""""""""""""""""""""
-source ~/Appdata/Local/nvim/sources/prettier-settings.vim
 
 """"""""""""""""""""""""""""""""""""
 " NVIM-WINDOW  SETTINGS
@@ -287,6 +334,36 @@ source ~/Appdata/Local/nvim/sources/nvim-window-settings.vim
 source ~/Appdata/Local/nvim/sources/vim-test-settings.vim
 
 """"""""""""""""""""""""""""""""""""
-" AUTO-PAIRS SETTINGS
+" LEXIMA SETTINGS
 """"""""""""""""""""""""""""""""""""
-source ~/Appdata/Local/nvim/sources/auto-pairs-settings.vim
+" source ~/Appdata/Local/nvim/sources/lexima-settings.vim
+
+""""""""""""""""""""""""""""""""""""
+" VIM-SNIP SETTINGS
+""""""""""""""""""""""""""""""""""""
+source ~/Appdata/Local/nvim/sources/vim-snip-settings.vim
+
+""""""""""""""""""""""""""""""""""""
+" VIM-STARTIFY SETTINGS
+""""""""""""""""""""""""""""""""""""
+source ~/Appdata/Local/nvim/sources/vim-startify-settings.vim
+
+""""""""""""""""""""""""""""""""""""
+" VIM-STARTIFY SETTINGS
+""""""""""""""""""""""""""""""""""""
+source ~/Appdata/Local/nvim/sources/vim-easy-align-settings.vim
+
+""""""""""""""""""""""""""""""""""""
+" VIM-LSP SETTINGS
+""""""""""""""""""""""""""""""""""""
+source ~/Appdata/Local/nvim/sources/vim-lsp-settings.vim
+
+""""""""""""""""""""""""""""""""""""
+" VIM-ASYNCOMPLETE SETTINGS
+""""""""""""""""""""""""""""""""""""
+source ~/Appdata/Local/nvim/sources/vim-asyncomplete-settings.vim
+
+""""""""""""""""""""""""""""""""""""
+" NVIM-AUTOPAIRS SETTINGS
+""""""""""""""""""""""""""""""""""""
+source ~/Appdata/Local/nvim/sources/nvim-autopairs-settings.vim

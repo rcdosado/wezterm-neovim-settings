@@ -159,28 +159,47 @@ return {
    font_shaper = "Harfbuzz",  -- "Allsorts", Harfbuzz
    font_size = 10.0,
    font_rasterizer = "FreeType",
-   font_antialias = "Greyscale",  -- None, Grayscale, Subpixel
-   font_hinting = "Full",  -- None, Vertical, VerticalSubpixel, Full
+   -- font_antialias = "Greyscale",  -- None, Grayscale, Subpixel
+   -- font_hinting = "Full",  -- None, Vertical, VerticalSubpixel, Full
+   -- font = wezterm.font("Monofur Nerd Font", {weight="Regular", stretch="Normal", style="Normal"}),
    -- font = wezterm.font("OperatorMono Nerd Font", {weight=325, stretch="Normal", italic=false}),
+   -- font = wezterm.font("Iosevka Nerd Font", {weight="Light", stretch="Normal", style="Normal"}),
+   -- font = wezterm.font("Iosevka Nerd Font", {weight="Regular", stretch="Normal", style="Normal"}),
+   font = wezterm.font("Iosevka Nerd Font", {weight="Medium", stretch="Normal", style="Normal"}),
+   -- font = wezterm.font("Iosevka Nerd Font", {weight="Bold", stretch="Normal", style="Normal"}),
    -- font = wezterm.font("OperatorMono Nerd Font", {weight="DemiLight", stretch="Normal", italic=false}),
    -- font = wezterm.font("OperatorMono Nerd Font", {weight=275, stretch="Normal", italic=false}),
-   -- font = wezterm.font("OperatorMono Nerd Font", {weight="Regular", stretch="Normal", italic=false}),
    -- font = wezterm.font("JetBrainsMono NF", {weight="Regular", stretch="Normal", italic=false}),
    -- font = wezterm.font("JetBrainsMonoMedium NF", {weight="Medium", stretch="Normal", italic=false}),
    -- font = wezterm.font("SauceCodePro NF", {weight="Regular", stretch="Normal", italic=false}),
    -- font = wezterm.font("SauceCodePro Nerd Font Mono", {weight="Regular", stretch="Normal", italic=false}),
    -- font = wezterm.font("SauceCodePro Nerd Font Mono", {weight="Regular", stretch="Normal", italic=false}),
    -- font = wezterm.font("JetBrainsMonoExtraBold Nerd Font Mono", {weight="ExtraBold", stretch="Normal", italic=false}),
-   font = wezterm.font("SFMono Nerd Font", {weight="DemiBold", stretch="Normal", style="Normal"}),
+   -- font = wezterm.font("SFMono Nerd Font", {weight="DemiBold", stretch="Normal", style="Normal"}),
    -- font = wezterm.font("SFMono Nerd Font", {weight="Medium", stretch="Normal", style="Normal"}),
    -- font = wezterm.font("CamingoCode Nerd Font", {weight="Regular", stretch="Normal", style="Normal"}),
    -- font = wezterm.font("CamingoCode Nerd Font", {weight="Bold", stretch="Normal", style="Normal"}),
+   -- font = wezterm.font("BlexMono NF", {weight="Regular", stretch="Normal", style="Normal"}),
+    -- font = wezterm.font("CaskaydiaCove NF", {weight="Regular", stretch="Normal", style="Normal"}),
+    -- font = wezterm.font("FantasqueSansMono NF", {weight="Regular", stretch="Normal", style="Normal"}),
+    -- font = wezterm.font("FantasqueSansMono NF", {weight="Regular", stretch="Normal", style="Italic"}),
+    -- font = wezterm.font("FantasqueSansMono NF", {weight="Bold", stretch="Normal", style="Normal"}),
+    -- font = wezterm.font("FantasqueSansMono NF", {weight="Bold", stretch="Normal", style="Italic"}),
+    -- font = wezterm.font("FiraCode NF", {weight="Light", stretch="Normal", style="Normal"}),
+    -- font = wezterm.font("FiraCode NF", {weight="Regular", stretch="Normal", style="Normal"}),
+    -- font = wezterm.font("FiraCode NF", {weight=450, stretch="Normal", style="Normal"}),
+    -- font = wezterm.font("FiraCode NF", {weight="Medium", stretch="Normal", style="Normal"}),
+    -- font = wezterm.font("FiraCode NF", {weight="DemiBold", stretch="Normal", style="Normal"}),
+    -- font = wezterm.font("FiraCode NF", {weight="Bold", stretch="Normal", style="Normal"}),
+    -- font = wezterm.font("JuliaMono", {weight="Regular", stretch="Normal", style="Normal"}),
+
    -- color_scheme = "Builtin Solarized Dark",
    -- color_scheme = "Obsidian",
    -- color_scheme = "Gruvbox Dark",
    -- color_scheme = "OneHalfDark",
    -- color_scheme = "Batman",
-   color_scheme = "Dracula",
+   -- color_scheme = "Dracula",
+   color_scheme = "Dark Violet (base16)",
    -- color_scheme = default_color_scheme,
 
    default_cursor_style = "BlinkingUnderline", -- SteadyBlock, SteadyBar, BlinkingBlock,
@@ -192,17 +211,23 @@ return {
    enable_scroll_bar = false,
    hide_tab_bar_if_only_one_tab = true,
    tab_max_width = 32,
+
   -- image background enable start ----------------------------- 
   --  window_background_opacity = 1.0,
-  --  window_background_image = "c:/tools/wallpapers/img46.jpg",
+  --  window_background_image = "c:/tools/wallpapers/img21.jpg",
   --  window_background_image_hsb = {
-  --   brightness = 1.0,
+  --   -- brightness = 1.0,
   --   -- brightness = 0.5,
   --   -- brightness = 0.3,
-  --   -- brightness = 0.1,
-  --   -- brightness = 0.04,
+  --   brightness = 0.1,
+  --   -- brightness = 0.05,
   --   hue = 1.0,
   --   saturation = 1.0,
   -- },
   -- image background enable end -------------------------------
+  
+  -- leaf
+   use_fancy_tab_bar = false,
+  
+
 }
