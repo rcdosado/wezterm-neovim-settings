@@ -50,7 +50,7 @@ Plug 'dstein64/vim-startuptime'
 
 " status line
 Plug 'nvim-lualine/lualine.nvim'
-" Plug 'akinsho/bufferline.nvim', { 'tag': 'v3.*' }
+Plug 'akinsho/bufferline.nvim', { 'tag': 'v3.*' }
 
 " indent guide
 Plug 'lukas-reineke/indent-blankline.nvim'
@@ -151,7 +151,7 @@ nmap <silent> <leader>m :History<CR>
 
 "init
 lua require('leap').set_default_keymaps()
-" lua require('bufferline').setup()
+lua require('bufferline').setup()
 lua require("nvim-autopairs").setup {}
 lua require'nvim-web-devicons'.get_icons()
 

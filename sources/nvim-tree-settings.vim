@@ -4,7 +4,6 @@ lua require'nvim-tree'.setup {
             \ open_on_setup = false,
             \ hijack_cursor = true,
             \ open_on_setup_file = false,
-            \ sync_root_with_cwd = true, 
             \ view = {
                 \ side = "left",
                 \ signcolumn = "no",
@@ -30,7 +29,6 @@ lua require'nvim-tree'.setup {
             \ update_focused_file = 
                 \ { 
                     \ enable=false, 
-                    \ update_root=true,
                 \ },
         \ }
 
